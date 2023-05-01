@@ -1,0 +1,6 @@
+# Reddit API Keys
+secret.json
+
+# Data folder
+*.json
+*.zip
