@@ -4,3 +4,4 @@ secret.json
 # Data folder
 *.json
 *.zip
+filtered_data/*

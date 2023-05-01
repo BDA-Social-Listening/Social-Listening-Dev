@@ -45,16 +45,14 @@ and NEWFOLDER is something like "filtered_data/" that is a directory that DOES N
 ```
 python3 filter.py data/ filtered_data/
 ```
+
+The file creates a new file filtered_data.txt
 """
 
 import sys
 import json
 import os
 from tqdm import tqdm
-
-import pyspark
-from pyspark import SparkConf
-from pyspark.context import SparkContext
 
 def main(data_folder, new_data_folder):
 
@@ -72,33 +70,27 @@ def main(data_folder, new_data_folder):
         print("ERROR CREATING NEW DIRECTORY at ", new_data_folder, ", returning ...")
         return
     
-    total_data_list_jsons = []
+    total_data_list_txt = []
     
     # For each data file, let's filter
+    print("FILTERING")
     for filename in tqdm(data_paths):
         # Load in file
         file_temp = open(filename, 'r')
         data_json_temp = json.load(file_temp)
         # Filter file
-        data_json_temp = [{key: el[key] for key in el if key == "subreddit" or key == "selftext"} for el in data_json_temp]
+        data_json_temp = [el['subreddit'] + ", " + el['selftext'] + "\n" for el in data_json_temp]
         # Merge to a common list
-        total_data_list_jsons = total_data_list_jsons + data_json_temp
+        total_data_list_txt = total_data_list_txt + data_json_temp
 
-    print("LENGTH: ", len(total_data_list_jsons), ", needs to be > 75k")
-    
-    # sc = SparkContext.getOrCreate(SparkConf().setMaster("local[*]"))
-    # conf = SparkConf().setAppName("MyApp")
-    # sc = SparkContext(conf=conf)
-    # data = sc.parallelize(total_data_list_jsons)
-
-    # df = sc.createDataFrame(data)
-    # df.take(10)
-
-    # df.saveAsTextFile(new_data_folder + "filtered_data")
+    print("LENGTH: ", len(total_data_list_txt), ", needs to be > 75k")
+    # print("Example: ", total_data_list_txt[0])
 
     # Save list as a text file
-    with open(new_data_folder + "filtered_data.json", 'w') as fout:
-        json.dump(total_data_list_jsons, fout)
+    with open(new_data_folder + "filtered_data.txt", 'w') as fout:
+        print("WRITING TO FILE")
+        for el in tqdm(total_data_list_txt):
+            fout.write(el)
 
 if __name__ == "__main__":
     data_folder = sys.argv[1]
