@@ -25,6 +25,15 @@ $ python3 filter.py data/ filtered_data/
 $ python3 split.py filtered_data/
 ```
 
+## Featured Media
+
+<figure style="margin-left: auto;
+  margin-right: auto; width: 90%; display: block;">
+    <img
+    src="media/sample_mental_health1.png?raw=true"
+    alt="A sample of mental health sentences after processing.">
+    <figcaption>Figure 1: A sample of mental health sentences after processing.</figcaption>
+</figure><br>
 
 ## Setting up the environment
 
