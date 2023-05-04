@@ -30,7 +30,12 @@ def main(data_folder):
     data = sc.textFile(data_folder + "filtered_data.txt")
 
     # Format as a key value pair from ?one long string?
-    data = data.map(lambda x: (x.split(',')[0], ''.join(x.split(',')[1:])))
+    # data = data.map(lambda x: (x.split(',')[0], ''.join(x.split(',')[1:])))
+    #BEGIN[ChatGPT]"from a sentence such as "mentalhealth, Truck driver substance abuse has been a growing problem in the United States for many years. The DOT has implemented many policies in an attempt to address this issue, but t  The job can be extremely stressfu", use a rdd.map to extract the label (the word before the first comma) and the rest of the text as separate elements"
+    data = data.map(lambda line: line.split(",", 1))
+    data = data.filter(lambda line: len(line) == 2)
+    data = data.map(lambda parts: (parts[0].strip(), parts[1].strip()))
+    #END[ChatGPT]
 
     # Remove any data that is "[removed]"
     data = data.filter(lambda x: "[removed]" not in x[1])
@@ -45,6 +50,10 @@ def main(data_folder):
 
     # Remove any records that are super short or super long
     data = data.filter(lambda x: len(x[1]) > 10 and len(x[1]) < 250)
+
+    subs = ["adhd", "anxiety", "depression", "mentalhealth", "mentalillness", "socialanxiety", "suicidewatch", "gaming", "guns", "music", "parenting"]
+    # NOTE: THIS LINE SEVERLY DECREASES SAMPLES BY REMOVING THESE RANDOM ARTIFACTS OF SUBS LIKE "u_accel-gaming", or "u_FarmYard-Gaming"
+    data = data.filter(lambda x: x[0] in subs)
 
     # Save data as text file
     data.saveAsTextFile(data_folder + "split_data")

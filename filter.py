@@ -54,6 +54,15 @@ import json
 import os
 from tqdm import tqdm
 
+def cleanup(text):
+    text = text.replace("\n", "")
+    text = text.replace("'", "")
+    text = text.replace('"', '')
+    text = text.replace("\\", "")
+    text = text.replace("\t", "")
+    text = text.replace("\r", "")
+    return text
+
 def main(data_folder, new_data_folder):
 
     # First get all data folders within base folder
@@ -79,7 +88,7 @@ def main(data_folder, new_data_folder):
         file_temp = open(filename, 'r')
         data_json_temp = json.load(file_temp)
         # Filter file
-        data_json_temp = [el['subreddit'] + ", " + el['selftext'] + "\n" for el in data_json_temp]
+        data_json_temp = [el['subreddit'] + ", " + cleanup(el['selftext']) + "\n" for el in data_json_temp]
         # Merge to a common list
         total_data_list_txt = total_data_list_txt + data_json_temp
 
