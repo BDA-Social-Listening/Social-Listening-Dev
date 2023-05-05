@@ -27,12 +27,24 @@ $ python3 split.py filtered_data/
 
 ## Featured Media
 
+This image represents sample data for the mental health subreddits.
+
 <figure style="margin-left: auto;
   margin-right: auto; width: 90%; display: block;">
     <img
     src="media/sample_mental_health1.png?raw=true"
     alt="A sample of mental health sentences after processing.">
     <figcaption>Figure 1: A sample of mental health sentences after processing.</figcaption>
+</figure><br>
+
+This image shows a sample LSH for matching text from non-mental health and mental-health subreddits.
+
+<figure style="margin-left: auto;
+  margin-right: auto; width: 90%; display: block;">
+    <img
+    src="media/matches.jpeg?raw=true"
+    alt="A sample of matches.">
+    <figcaption>Figure 2: A sample of matches.</figcaption>
 </figure><br>
 
 ## Setting up the environment
@@ -52,3 +64,19 @@ conda activate bda_social_listening
 ```
 pip3 install -r requirements.txt
 ```
+
+## TODO
+ - We need an efficient implementation of LSH - Aniket and Nishit (at least to reach out for information)
+ - We need to implement the vectorization of text via BERT (for big data ideally, or use a lighter version roBERTa) - Carwyn and Balaji
+ - LDA and (?) word cloud/cluster diagram - Aniket and Nishit
+ - Add a branch to git and add the sample data from both subreddit labels - Carwyn
+
+## Plan:
+ - Take the raw text data and run it through BERT to get sentence representation vector
+ - Perform LSH to cluster similar data and then use this to reduce observations
+ - Perform LDA to cluster the dataset, and then use the results of this analysis to discriminate between posts in the mental health subreddit that are mental health concerns, vs not mental health focused
+ - - Basically a clustering algorithm that generates clusters with "themes", and then we must give it labels based on analysis of posts in each subreddit
+ - - We can use this to further discriminate between posts that show mental health concern vs discuss mental health issues but are not in need of help
+ - - Potentially add this cluster to the data for the classifier (as a new feature)
+ - - Get word clouds and cluster graph
+ - Now we have final data to use for classifier
