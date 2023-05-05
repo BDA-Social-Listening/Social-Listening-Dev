@@ -49,20 +49,45 @@ def main(data_folder):
         for sentence in split:
             yield (record[0], sentence.strip())
 
-    data = data.flatMap(lambda x: splitSentences(x))
+    # data = data.flatMap(lambda x: splitSentences(x))
 
     # Remove any records that are super short or super long
-    data = data.filter(lambda x: len(x[1]) > 10 and len(x[1]) < 250)
+    # data = data.filter(lambda x: len(x[1]) > 10 and len(x[1]) < 250)
 
     subs = ["adhd", "anxiety", "depression", "mentalhealth", "mentalillness", "socialanxiety", "suicidewatch", "gaming", "guns", "music", "parenting"]
     # NOTE: THIS LINE SEVERLY DECREASES SAMPLES BY REMOVING THESE RANDOM ARTIFACTS OF SUBS LIKE "u_accel-gaming", or "u_FarmYard-Gaming"
     data = data.filter(lambda x: x[0] in subs)
+    data = data.filter(lambda x: len(x[1]) > 1)
+
+    # Sample 1000 mental health and 1000 non mental health for preliminary analysis
+    mental_health_subs = ["adhd", "anxiety", "depression", "mentalhealth", "mentalillness", "socialanxiety", "suicidewatch"]
+    mental_subs = data.filter(lambda rec: rec[0] in mental_health_subs)
+
+    non_mental_health_subs = ["gaming", "guns", "music", "parenting"]
+    non_mental_subs = data.filter(lambda rec: rec[0] in non_mental_health_subs)
 
     # map back to a comma delimited string (?)
     data = data.map(lambda rec: rec[0] + ", " + rec[1])
+    mental_subs = mental_subs.map(lambda rec: rec[0] + ", " + rec[1] + "\n")
+    non_mental_subs = non_mental_subs.map(lambda rec: rec[0] + ", " + rec[1] + "\n")
+
+    print("Data length: ", data.count())
 
     # Save data as text file
     data.saveAsTextFile(data_folder + "split_data")
+
+    ms = mental_subs.takeSample(False, 1000, 2)
+    print(len(ms))
+    with open(data_folder + 'mental_health_sample.txt', 'w') as f:
+        for line in ms:
+            f.write(line)
+
+    
+    nms = non_mental_subs.takeSample(False, 1000, 2)
+    print(len(nms))
+    with open(data_folder + 'non_mental_health_sample.txt', 'w') as f:
+        for line in nms:
+            f.write(line)
 
 if __name__ == "__main__":
     data_folder = sys.argv[1]
