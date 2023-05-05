@@ -61,6 +61,7 @@ def cleanup(text):
     text = text.replace("\\", "")
     text = text.replace("\t", "")
     text = text.replace("\r", "")
+    text = text.replace(",", "")
     return text
 
 def main(data_folder, new_data_folder):

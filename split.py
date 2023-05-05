@@ -39,6 +39,9 @@ def main(data_folder):
 
     # Remove any data that is "[removed]"
     data = data.filter(lambda x: "[removed]" not in x[1])
+    data = data.filter(lambda x: "[deleted]" not in x[1])
+    data = data.filter(lambda x: "http" not in x[1])
+    data = data.filter(lambda x: "com/" not in x[1])
 
     # Split into sentences
     def splitSentences(record):
@@ -54,6 +57,9 @@ def main(data_folder):
     subs = ["adhd", "anxiety", "depression", "mentalhealth", "mentalillness", "socialanxiety", "suicidewatch", "gaming", "guns", "music", "parenting"]
     # NOTE: THIS LINE SEVERLY DECREASES SAMPLES BY REMOVING THESE RANDOM ARTIFACTS OF SUBS LIKE "u_accel-gaming", or "u_FarmYard-Gaming"
     data = data.filter(lambda x: x[0] in subs)
+
+    # map back to a comma delimited string (?)
+    data = data.map(lambda rec: rec[0] + ", " + rec[1])
 
     # Save data as text file
     data.saveAsTextFile(data_folder + "split_data")
