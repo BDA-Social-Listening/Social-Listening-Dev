@@ -19,6 +19,8 @@ or
 ```
 $ python3 embed_nospark_batch.py [FILE] [FOLDER_TO_SAVE_EMBED_DATA]
 ```
+
+This takes 6600 Seconds and takes up 14GB
 """
 
 import sys
@@ -70,7 +72,7 @@ def main(data_file, data_folder):
             subreddit, selftext = subreddit.strip(), selftext.strip()
 
             # Check if buffer is full
-            if len(buf) == 32 or i == num_lines-1:
+            if len(buf) == 32 or i == num_lines: # If this line errors, add a -1 after 'num_lines'
                 # Perform encoding to sentence representations
                 sentence_embeddings = get_embeddings_from_raw_sentences(list(list(zip(*buf))[1]), model, tokenizer, device)
                 sentence_embeddings = sentence_embeddings.detach().cpu().numpy()
