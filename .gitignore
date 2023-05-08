@@ -6,3 +6,6 @@ secret.json
 *.zip
 filtered_data/split_data/
 filtered_data/filtered_data.txt
+filtered_data/split_data_single/
+filtered_data/embed_data.txt
+filtered_data/filtered_data.txt

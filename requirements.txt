@@ -2,3 +2,6 @@ requests
 pyspark==3.3.2
 tqdm
 numpy
+transformers
+torch
+SentencePiece

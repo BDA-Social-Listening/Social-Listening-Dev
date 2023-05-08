@@ -24,6 +24,14 @@ $ python3 filter.py data/ filtered_data/
 ```
 $ python3 split.py filtered_data/
 ```
+4. The data is converted to a single text file for ease of batching in sentence embedding
+```
+$ python3 split_rdd_to_txt.py
+```
+5. Get embeddings
+```
+$ python3 embed_nospark_batch.py
+```
 
 ## Featured Media
 
