@@ -20,7 +20,7 @@ $ ./scrape_data_master.sh
 ```
 $ python3 filter.py data/ filtered_data/
 ```
-3. The data is split into sentence granularity to help increase the size of our trainable data after LSH clustering. This also removes any \[removed] posts, constrains the lengths of sentences, and removes leading or trailing whitespace. This uses split.py and populates the filtered_data/ folder with  split_data.txt
+3. The data is (was, depreciated) split into sentence granularity to help increase the size of our trainable data after LSH clustering. This also removes any \[removed] posts, constrains the lengths of sentences, and removes leading or trailing whitespace. This uses split.py and populates the filtered_data/ folder with  split_data.txt
 ```
 $ python3 split.py filtered_data/
 ```
@@ -78,6 +78,28 @@ pip3 install -r requirements.txt
  - We need to implement the vectorization of text via BERT (for big data ideally, or use a lighter version roBERTa) - Carwyn and Balaji
  - LDA and (?) word cloud/cluster diagram - Aniket and Nishit
  - Add a branch to git and add the sample data from both subreddit labels - Carwyn
+
+## TODO 05/10/23
+ - Figure out the LSH and apply it to our data
+ - Figure out if we can use the word embedding vectors with the current LDA implementation
+ - - Right now using Gensim, but we can also try sklearn if we can't do ^ 
+ - Now: 2 stages:
+ - - Training data (filtered to only mental health data)- which is used for the LDA to understand what these topics mean more descriptively (we will have to assign labels)
+ - - Train a classifier (NN) on the training data - distinguish between mental health and non mental health
+
+    Pipeline:
+    - Put a post through the mental health classifier to see if it is in the mental health category
+    - - If so, put into LDA (pretty much a classifier / generative classifier) to see the more specific categorization
+
+    Justification
+    - LDA is expensive so we must use a smaller dataset for understanding cluster labels
+    - We want an ensemble learning (similar to boosting for decision trees)
+
+ - LSH - Balaji and Carwyn (May 11th)
+ - LDA - Aniket and Nishit (May 11th)
+ - Meet on Friday (Poster, Report, and Classifier)
+ - Code and Report due on 14th
+ - Presentation due on 15th
 
 ## Plan:
  - Take the raw text data and run it through BERT to get sentence representation vector
