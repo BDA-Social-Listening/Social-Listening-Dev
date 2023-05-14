@@ -57,3 +57,16 @@ class TransformerModel(nn.Module):
         output = self.transformer_encoder(src)
         output = self.decoder(output)
         return output
+    
+class TransformerModel(nn.Module):
+    
+    def __init__(self, d_model: int, classes: int, dropout: float = 0.5):
+        # Instantiate the superclass (nn.Module) such that our model can build upon it.
+        super().__init__()
+
+        self.linear = nn.Linear(d_model, classes)        
+
+    def forward(self, src: Tensor) -> Tensor:
+        output = self.linear(src)
+        output = torch.sigmoid(output)
+        return output
