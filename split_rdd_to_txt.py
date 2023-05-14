@@ -17,7 +17,8 @@ import pyspark
 from pyspark import SparkConf
 from pyspark.context import SparkContext
 
-df = "filtered_data/"
+# MODIFY THIS BEFORE RUNNING TO THE DIRECTORY WITH split_data/
+df = "filtered_data2/"
 
 conf = SparkConf().setAppName("MyApp")
 sc = SparkContext(conf=conf)

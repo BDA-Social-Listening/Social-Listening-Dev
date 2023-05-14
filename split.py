@@ -32,9 +32,9 @@ def main(data_folder):
     # Format as a key value pair from ?one long string?
     # data = data.map(lambda x: (x.split(',')[0], ''.join(x.split(',')[1:])))
     #BEGIN[ChatGPT]"from a sentence such as "mentalhealth, Truck driver substance abuse has been a growing problem in the United States for many years. The DOT has implemented many policies in an attempt to address this issue, but t  The job can be extremely stressfu", use a rdd.map to extract the label (the word before the first comma) and the rest of the text as separate elements"
-    data = data.map(lambda line: line.split(",", 1))
-    data = data.filter(lambda line: len(line) == 2)
-    data = data.map(lambda parts: (parts[0].strip(), parts[1].strip()))
+    data = data.map(lambda line: line.split(",", 2))
+    data = data.filter(lambda line: len(line) == 3)
+    data = data.map(lambda parts: (parts[0].strip(), parts[1].strip(), parts[2].strip()))
     #END[ChatGPT]
 
     # Remove any data that is "[removed]"
@@ -67,9 +67,9 @@ def main(data_folder):
     non_mental_subs = data.filter(lambda rec: rec[0] in non_mental_health_subs)
 
     # map back to a comma delimited string (?)
-    data = data.map(lambda rec: rec[0] + ", " + rec[1])
-    mental_subs = mental_subs.map(lambda rec: rec[0] + ", " + rec[1] + "\n")
-    non_mental_subs = non_mental_subs.map(lambda rec: rec[0] + ", " + rec[1] + "\n")
+    data = data.map(lambda rec: rec[0] + ", " + rec[1] + ", " + rec[2])
+    # mental_subs = mental_subs.map(lambda rec: rec[0] + ", " + rec[1] + "\n")
+    # non_mental_subs = non_mental_subs.map(lambda rec: rec[0] + ", " + rec[1] + "\n")
 
     print("Data length: ", data.count())
 
