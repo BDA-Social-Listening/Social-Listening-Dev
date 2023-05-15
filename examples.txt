@@ -1,0 +1,25 @@
+TRUE POSITIVES:
+
+['depression', ' Has anyone ever been to residential treatment for depression? Did it help at all?']
+['depression', ' you ever cry so much that your eyes become so swollen to the point where it’s hard to blink? or is that not normal']
+['mentalhealth', ' It just seems like impossible.']
+['depression', ' I really fucked everything up I wish I wasn’t like this but I am and I really want to be gone yo this shit is too painful.']
+
+TRUE NEGATIVES:
+
+['gaming', ' V-bucks in fortnite are really meaning virtual bucks! As in they have no value or are not real and only give you things that have physical value in other words the v-bucks are just virtual currency! Nice one epic games.']
+['guns', ' I just discovered the vz 52and I dont understand why its not a more popular surplus buy. Seem to be similarly priced .Is 7.62x45 no longer being produced and only available as surplus ?']
+
+FALSE POSITIVES:
+
+['gaming', ' Im completely new to PC gaming. Im not even really sure what to look for.']
+['gaming', ' I hate when you start a game and the sound explodes your ears! even if not a new game and you change the settings for lower audio but only aplies after the developers logo yet it hit my ears a lot!']
+['gaming', ' Did anyone else buy this im looking forward to seeing what i get later on today']
+['gaming', ' Does anyone know any multiplayer games which i could play with my cousin who broke his hand?']
+['guns', ' I built an ar15 this summer and havent put a scope on it yet. I probably will only use it for shooting pigs and coyotes out to 300 yards. Does anyone have any suggestion for a short range scope with clear glass for less than $500?']
+['guns', ' Lets talk about guns and not abortions mkay?']
+
+FALSE NEGATIVE:
+
+['depression', ' If someone just randomly gave me a sincere hug especially any of my friends for once because none of them do that.I can guarentee Id feel fifteen billion times better about myself and about life. And yet I cant do that because if I did theyd just be like WTF? and push me off.I just want a hug. ;_;']
+['mentalhealth', ' I 17M consider myself extremely fortunate in terms of upbringing and personally have no family issues or traumatic events that can cause me to feel this way.One week ago I had stumbled upon a post which was very much bait stating that did you know guys need to insert a toothpick even in their penises to unclog them every once in a while. For some reason this post that I had simply looked at for a few seconds managed to stick in my head for a very long timeI have now constantly been thinking about this fact and constantly imagine someone forcibly sticking a sharp needle or toothpick through my dick hole. It has gotten to a point where I am no longer able to read books or watch videos as there is always a tingling sensation around my dick. I would absolutely love to rewind time to when I never saw that post which is no longer possible any suggestions to alleviate this issue of mine would be greatly appreciatedThanks!']

@@ -58,7 +58,7 @@ class TransformerModel(nn.Module):
         output = self.decoder(output)
         return output
     
-class TransformerModel(nn.Module):
+class LogisticModel(nn.Module):
     
     def __init__(self, d_model: int, classes: int, dropout: float = 0.5):
         # Instantiate the superclass (nn.Module) such that our model can build upon it.

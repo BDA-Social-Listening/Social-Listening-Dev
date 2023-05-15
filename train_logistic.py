@@ -21,7 +21,7 @@ import torch.utils.data as data
 from torch.utils.data import Dataset, DataLoader
 import torch.nn.functional as F
 
-from model import TransformerModel
+from model import LogisticModel
 
 def load_dataset(embed_dataset_name, labeled_dataset_name, label_map):
 
@@ -70,7 +70,7 @@ def setup_model():
     emsize = 768  # embedding dimension
     dropout = 0.2  # dropout probability
     classes = 11
-    model = TransformerModel(emsize, classes, dropout).to(device)
+    model = LogisticModel(emsize, classes, dropout).to(device)
     lr = 0.00005
 
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
